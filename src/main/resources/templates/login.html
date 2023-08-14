@@ -19,11 +19,21 @@
     </div>
     <br><br>
     <form data-th-action="@{/login}" method="post">
-        <div class="mb-3"><label class="form-label"> User Name : <input class="form-control" type="text" name="username"/> </label></div>
+        <div class="mb-3"><label class="form-label"> User Name : <input class="form-control" type="email" name="email"/> </label></div>
         <div class="mb-3"><label class="form-label"> Password: <input class="form-control" type="password" name="password"/> </label></div>
         <div><input class="btn btn-primary" type="submit" value="Sign In"/></div>
+        <div class="d-flex justify-content-center mt-5">
+            <a href="#" data-th-href="@{/registration}">Crea una cuenta &nbsp|</a>
+            <a href="#" data-th-href="@{/recuperar_contrasena}">&nbsp Recuperar contraseña</a>
+        </div>
     </form>
 </div>
     <footer data-th-replace="fragments/footer :: footer"></footer>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>

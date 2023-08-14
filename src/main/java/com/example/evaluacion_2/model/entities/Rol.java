@@ -10,13 +10,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="authorities")
+@Table(name="rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private int id;
-
-    private String username;
     @NotEmpty
     private String authority;
 }

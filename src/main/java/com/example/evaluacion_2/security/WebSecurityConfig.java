@@ -36,12 +36,15 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authz) -> {
                             authz.requestMatchers("/").permitAll()
                                     .requestMatchers("/registration").permitAll()
+                                    .requestMatchers("/recuperar_contrasena").permitAll()
+                                    .requestMatchers("/recuperar_contrasena/**").permitAll()
                                     .requestMatchers("/home/**").hasAnyRole("USER", "ADMIN")
                                     .anyRequest().authenticated();
                         }
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .usernameParameter("email")
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());

@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-body register-card-body">
                     <p class="text-center">Crea una cuenta</p>
-                    <form action="#" th:action="@{/register}" th:object="${user}" method="post" class="">
+                    <form action="#" th:action="@{/registration}" th:object="${user}" method="post" class="">
                         <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                             <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                         </div>
@@ -52,18 +52,28 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                                <input type="password" class="form-control" placeholder="Confirmar contraseña"  th:field="*{confirmPassword}">
                                 <div class="input-group-append">
                                     <span class="input-group-text h-100"><i class="fas fa-lock"></i></span>
                                 </div>
                             </div>
                         </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" placeholder="Escribe un secreto que solo tu conozcas!"  th:field="*{secreto}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text h-100"><i class="fas fa-lock"></i></span>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Registrarse</button>
                         </div>
                         </div>
-
                     </form>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="#" data-th-href="@{/login}">Iniciar sesión</a>
                 </div>
             </div>
         </div>
@@ -72,5 +82,11 @@
 
 
 <footer data-th-replace="fragments/footer :: footer"></footer>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.evaluacion_2.model.entities.Rol;
 import com.example.evaluacion_2.model.entities.Usuario;
+import com.example.evaluacion_2.model.repositories.RolRepository;
 import com.example.evaluacion_2.model.repositories.UsuarioRepository;
 import com.example.evaluacion_2.model.entities.Rol;
 import com.example.evaluacion_2.model.entities.Usuario;
@@ -22,19 +23,23 @@ public class UsuarioDetailsService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository repo;
-
+    @Autowired
+    private RolRepository repoRol;
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = repo.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Usuario user = repo.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Rol rol : user.getAuthorities()) {
-            authorities.add(new SimpleGrantedAuthority(rol.getAuthority()));
-        }
-        return new User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
+
+        int puestos = user.getRol().getId();
+        Rol roles = repoRol.findById(puestos);
+        authorities.add(new SimpleGrantedAuthority(roles.getAuthority()));
+        System.out.println("Autoridades: " + authorities + " user = " + user );
+       return new User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
     }
 
 }
