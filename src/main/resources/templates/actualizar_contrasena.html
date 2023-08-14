@@ -24,12 +24,12 @@
                             <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                         </div>
                         <div class="d-grid" style="gap:12px">
-                            <div th:if="${actualizacion_exitosa == 'true'}" class="alert alert-success">
+                            <div th:if="${actualizacion_exitosa == 'true'}" >
                                 <div class="d-flex justify-content-center mt-5">
                                     <a href="#" onclick="/login">Ingrese a facebook</a>
                                 </div>
                             </div>
-                            <div th:if="${actualizacion_exitosa == null}" class="alert alert-success">
+                            <div th:if="${actualizacion_exitosa == null}">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <input type="password" class="form-control" placeholder="Nueva contraseña"
